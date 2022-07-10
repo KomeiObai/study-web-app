@@ -1,0 +1,12 @@
+version: "3"
+services:
+  backend:
+    # image: rust:1.49.0-slim-buster
+    build: 
+      context: ./backend
+    ports:
+      - 8080:3030
+    volumes:
+     - ./app:/app
+    tty: true
+    working_dir: /app
