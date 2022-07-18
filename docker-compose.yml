@@ -8,5 +8,6 @@ services:
       - 8080:3030
     volumes:
      - ./app:/app
+     - ./videos:/videos
     tty: true
     working_dir: /app
