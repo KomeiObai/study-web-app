@@ -21,11 +21,13 @@ use warp::Filter;
 use tokio;
 
 async fn hello(name: String) -> Result<impl warp::Reply, Infallible> {
- Ok(format!("hello {}!", name))
+ Ok(format!("hello {}!\n", name))
 }
 #[tokio::main]
 async fn main() { 
     let addr = [0, 0, 0, 0];
     let port = 3030;
-    warp::serve( warp::path!("example" / String) .and(warp::get()) .and_then(hello) ) .run((addr, port)) .await;
+
+    let filter = warp::path!("example" / String).and(warp::get()).and_then(hello);
+    warp::serve( filter ).run((addr, port)).await;
 }
