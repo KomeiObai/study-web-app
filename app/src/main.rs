@@ -23,11 +23,18 @@ use tokio;
 async fn hello(name: String) -> Result<impl warp::Reply, Infallible> {
  Ok(format!("hello {}!\n", name))
 }
+
 #[tokio::main]
 async fn main() { 
     let addr = [0, 0, 0, 0];
     let port = 3030;
 
-    let filter = warp::path!("example" / String).and(warp::get()).and_then(hello);
-    warp::serve( filter ).run((addr, port)).await;
+    // fiter必要なfilterを個別に用意して、ruteにまとめる必要がある
+    let example = warp::path!("example" / String).and(warp::get()).and_then(hello);
+
+    // ２つ目以降を作成したら.or(filter)のように追加する。
+    let routes = warp::get().and(
+        example
+    );
+    warp::serve( routes ).run((addr, port)).await;
 }
