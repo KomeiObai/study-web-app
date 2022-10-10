@@ -5,9 +5,20 @@ services:
     build: 
       context: ./backend
     ports:
-      - 8080:3030
+      - 3030:3030
     volumes:
      - ./backend/app:/app
      - ./videos:/videos
     tty: true
     working_dir: /app
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   ports:
+  #     - 8080:8080
+  #   volumes:
+  #     - ./frontend/app:/app
+  #   environment:
+  #     - USER=root
+  #   # tty: true
+  #   working_dir: /app
