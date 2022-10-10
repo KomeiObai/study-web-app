@@ -20,8 +20,14 @@ use std::convert::Infallible;
 use warp::Filter;
 use tokio;
 
+mod search_dirctory;
+
 async fn hello(name: String) -> Result<impl warp::Reply, Infallible> {
- Ok(format!("hello {}!\n", name))
+    Ok(format!("hello {}!\n", name))
+}
+
+async fn searchdir() -> Result<impl warp::Reply, Infallible> {
+    search_dirctory::search_dir("/videos");
 }
 
 #[tokio::main]
